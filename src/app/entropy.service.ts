@@ -31,7 +31,7 @@ export class EntropyService {
   // @ts-ignore
   temporaryEntropy: TemporaryEntropy;
   // This boolean defines whether or not the "advanced" entropy settings are open on sign up.
-  advancedOpen = false;
+  advancedOpen = true;
 
   constructor() {
     this.setNewTemporaryEntropy();

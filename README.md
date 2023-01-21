@@ -1,6 +1,7 @@
 # Identity
 
-DeSo Identity Service
+DeSo Identity Service adapted for the love4src community nodes
+=======
 
 ## Development server
 

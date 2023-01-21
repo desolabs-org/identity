@@ -122,7 +122,7 @@ export class AccountService {
   }
 
   getAccessLevel(publicKey: string, hostname: string): AccessLevel {
-    if (GlobalVarsService.noAccessHostnames.includes(hostname)) {
+    if (!GlobalVarsService.fullAccessHostnames.includes(hostname)) {
       return AccessLevel.None;
     }
 
@@ -939,27 +939,6 @@ export class AccountService {
         userInfo.publicKeyHex,
         userInfo.network
       );
-    }
-
-    // In the case of a metamask login, we generate a new derived key and
-    // deposit addresses for the user. In order to recover funds sent to an old
-    // deposit address, we keep a record of the old derived info.
-    if (privateUsers[publicKey]?.derivedPublicKeyBase58Check && privateUsers[publicKey]?.derivedPublicKeyBase58Check !== userInfo.derivedPublicKeyBase58Check) {
-      const previousUserInfo = privateUsers[publicKey];
-      const archivedUserData = JSON.parse(window.localStorage.getItem("archivedUserData") ?? "{}");
-
-      if (Array.isArray(archivedUserData[publicKey])) {
-        archivedUserData[publicKey].push(previousUserInfo);
-
-        // messagingKeyRandomness is deterministic, so if they've generated it at least once before, we can just use that for any new login attempts.
-        const existingMessagingKeyRandomness = archivedUserData[publicKey].find((u: any) => !!u.messagingKeyRandomness)?.messagingKeyRandomness;
-        if (existingMessagingKeyRandomness && !userInfo.messagingKeyRandomness) {
-          userInfo.messagingKeyRandomness = existingMessagingKeyRandomness;
-        }
-      } else {
-        archivedUserData[publicKey] = [previousUserInfo];
-      }
-      window.localStorage.setItem("archivedUserData", JSON.stringify(archivedUserData));
     }
 
     privateUsers[publicKey] = userInfo;

@@ -31,7 +31,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   publicKeyAdded = '';
 
   // Advanced tab
-  advancedOpen = false;
+  advancedOpen = true;
   showMnemonicError = false;
   showEntropyHexError = false;
 

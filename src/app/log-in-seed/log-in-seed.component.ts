@@ -19,7 +19,7 @@ export class LogInSeedComponent implements OnInit {
 
   // Loading an account
   showLoadAccount = false;
-  advancedOpen = false;
+  advancedOpen = true;
   loginError = '';
   mnemonic = '';
   extraText = '';
