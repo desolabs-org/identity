@@ -4,16 +4,12 @@
 
 export const environment = {
   production: false,
-  hostname: 'https://identity.deso.org',
-  nodeURL: 'https://node.deso.org',
+  hostname: 'identity.dev.desolabs.org',
+  nodeURL: 'https://node.desolabs.org',
   fullAccessHostnames: [
-    'bitclout.com',
-    'bitclout.green',
-    'bitclout.blue',
-    'localhost',
-    'node.deso.org',
-    'signup.deso.org',
-    'signup.deso.com',
+    'localhost', 
+    'frontend.dev.desolabs.org', 
+    'dev.deso.ninja'
   ],
   noAccessHostnames: [''],
   jumioSupported: false,
