@@ -21,16 +21,9 @@ import { LogInSeedComponent } from './log-in-seed/log-in-seed.component';
 import { GoogleComponent } from './auth/google/google.component';
 import { AvatarDirective } from './avatar/avatar.directive';
 import { DeriveComponent } from './derive/derive.component';
-import { JumioComponent } from './jumio/jumio.component';
-import { JumioSuccessComponent } from './jumio/jumio-success/jumio-success.component';
-import { JumioErrorComponent } from './jumio/jumio-error/jumio-error.component';
 import { ErrorCallbackComponent } from './error-callback/error-callback.component';
 import { SharedSecretComponent } from './shared-secret/shared-secret.component';
-import { SignUpGetStarterDESOComponent } from './sign-up-get-starter-deso/sign-up-get-starter-deso.component';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
-import { FreeDesoMessageComponent } from './free-deso-message/free-deso-message.component';
-import { FreeDeSoDisclaimerComponent } from './free-deso-message/free-deso-disclaimer/free-deso-disclaimer.component';
 import { TransactionSpendingLimitComponent } from './transaction-spending-limit/transaction-spending-limit.component';
 import { TransactionSpendingLimitSectionComponent } from './transaction-spending-limit/transaction-spending-limit-section/transaction-spending-limit-section.component';
 import { TransactionSpendingLimitCoinComponent } from './transaction-spending-limit/transaction-spending-limit-coin/transaction-spending-limit-coin.component';
@@ -38,12 +31,6 @@ import { TransactionSpendingLimitNftComponent } from './transaction-spending-lim
 import { SanitizePostBodyPipe } from 'src/lib/pipes/sanitize-and-auto-link-pipe';
 import { SanitizeVideoUrlPipe } from 'src/lib/pipes/sanitize-video-url-pipe';
 import { TransactionSpendingLimitDaoCoinLimitOrderComponent } from './transaction-spending-limit/transaction-spending-limit-dao-coin-limit-order/transaction-spending-limit-dao-coin-limit-order.component';
-import { BuyDeSoComponentWrapper } from './buy-deso/buy-deso/buy-deso.component';
-import { IconsModule } from './icons/icons.module';
-import { GetDesoComponent } from './get-deso/get-deso.component';
-import { BuyDeSoCompletePageComponent } from './buy-deso/buy-deso-complete-page/buy-deso-complete-page.component';
-import { BuyDesoPageComponent } from './buy-deso/buy-deso-page/buy-deso-page.component';
-import { BuyOrSendDesoComponent } from './buy-or-send-deso/buy-or-send-deso.component';
 import { MessagingGroupComponent } from './messaging-group/messaging-group.component';
 import { SignUpMetamaskComponent } from './sign-up-metamask/sign-up-metamask.component';
 import { MetamaskService } from './metamask.service';
@@ -66,14 +53,8 @@ import { AccountSelectComponent } from './account-select/account-select.componen
     GoogleComponent,
     AvatarDirective,
     DeriveComponent,
-    JumioComponent,
-    JumioSuccessComponent,
-    JumioErrorComponent,
     ErrorCallbackComponent,
     SharedSecretComponent,
-    SignUpGetStarterDESOComponent,
-    FreeDesoMessageComponent,
-    FreeDeSoDisclaimerComponent,
     TransactionSpendingLimitComponent,
     TransactionSpendingLimitSectionComponent,
     TransactionSpendingLimitCoinComponent,
@@ -81,10 +62,6 @@ import { AccountSelectComponent } from './account-select/account-select.componen
     SanitizePostBodyPipe,
     SanitizeVideoUrlPipe,
     TransactionSpendingLimitDaoCoinLimitOrderComponent,
-    GetDesoComponent,
-    BuyDeSoCompletePageComponent,
-    BuyDesoPageComponent,
-    BuyOrSendDesoComponent,
     SignUpMetamaskComponent,
     ArrowToggleComponent,
     TruncateAddressOrUsernamePipe,
@@ -101,9 +78,6 @@ import { AccountSelectComponent } from './account-select/account-select.componen
     ReactiveFormsModule,
     MatFormFieldModule,
     MatTooltipModule,
-    NgxIntlTelInputModule,
-    IconsModule,
-    BuyDeSoComponentWrapper,
     CookieModule.forRoot(),
   ],
   providers: [

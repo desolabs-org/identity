@@ -45,8 +45,7 @@ import { ExtraData } from '../../types/identity';
 
 @Component({
   selector: 'app-approve',
-  templateUrl: './approve.component.html',
-  styleUrls: ['./approve.component.scss'],
+  templateUrl: './approve.component.html'
 })
 export class ApproveComponent implements OnInit {
   transaction: Transaction = new Transaction();

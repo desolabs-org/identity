@@ -10,7 +10,6 @@ import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-shared-secret',
   templateUrl: './shared-secret.component.html',
-  styleUrls: ['./shared-secret.component.scss'],
 })
 export class SharedSecretComponent implements OnInit {
   ownerPublicKeyBase58Check = '';

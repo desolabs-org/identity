@@ -15,8 +15,7 @@ import { BackendAPIService } from '../../backend-api.service';
 
 @Component({
   selector: 'app-google',
-  templateUrl: './google.component.html',
-  styleUrls: ['./google.component.scss'],
+  templateUrl: './google.component.html'
 })
 export class GoogleComponent implements OnInit {
   loading = true;
@@ -185,13 +184,13 @@ export class GoogleComponent implements OnInit {
                 return;
               }
             }
-            this.router.navigate(['/', RouteNames.GET_DESO], {
+            this.router.navigate(['/'], {
               queryParams: { publicKey: this.publicKey, signedUp },
               queryParamsHandling: 'merge',
             });
           });
       } else {
-        this.router.navigate(['/', RouteNames.GET_DESO], {
+        this.router.navigate(['/'], {
           queryParams: { publicKey: this.publicKey, signedUp },
           queryParamsHandling: 'merge',
         });

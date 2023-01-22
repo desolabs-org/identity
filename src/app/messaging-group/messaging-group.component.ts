@@ -19,7 +19,6 @@ export enum MESSAGING_GROUP_OPERATION {
 @Component({
   selector: 'app-messaging-group',
   templateUrl: './messaging-group.component.html',
-  styleUrls: ['./messaging-group.component.scss']
 })
 export class MessagingGroupComponent implements OnInit {
 

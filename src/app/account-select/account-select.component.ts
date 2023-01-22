@@ -8,8 +8,7 @@ import { GlobalVarsService } from '../global-vars.service';
 
 @Component({
   selector: 'app-account-select',
-  templateUrl: './account-select.component.html',
-  styleUrls: ['./account-select.component.scss'],
+  templateUrl: './account-select.component.html'
 })
 export class AccountSelectComponent implements OnInit {
   // Let people either pass in the users or default to calling it the standard way

@@ -8,7 +8,6 @@ import { Network } from '../../types/identity';
 @Component({
   selector: 'app-log-in-options',
   templateUrl: './log-in-options.component.html',
-  styleUrls: ['./log-in-options.component.scss'],
 })
 export class LogInOptionsComponent implements OnInit {
   constructor(
@@ -30,7 +29,7 @@ export class LogInOptionsComponent implements OnInit {
   }
 
   navigateToGetDeso(publicKey: string): void {
-    this.router.navigate(['/', RouteNames.GET_DESO], {
+    this.router.navigate(['/'], {
       queryParamsHandling: 'merge',
       queryParams: { publicKey },
     });

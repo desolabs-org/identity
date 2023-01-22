@@ -6,9 +6,6 @@ import { TransactionSpendingLimitComponent } from '../transaction-spending-limit
   selector: 'app-transaction-spending-limit-dao-coin-limit-order',
   templateUrl:
     './transaction-spending-limit-dao-coin-limit-order.component.html',
-  styleUrls: [
-    './transaction-spending-limit-dao-coin-limit-order.component.scss',
-  ],
 })
 export class TransactionSpendingLimitDaoCoinLimitOrderComponent
   implements OnInit

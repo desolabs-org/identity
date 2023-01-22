@@ -33,7 +33,6 @@ enum METAMASK {
 @Component({
   selector: 'app-sign-up-metamask',
   templateUrl: './sign-up-metamask.component.html',
-  styleUrls: ['./sign-up-metamask.component.scss'],
 })
 export class SignUpMetamaskComponent implements OnInit {
   private static UNLIMITED_DERIVED_KEY_EXPIRATION: Readonly<number> = 100000000000;

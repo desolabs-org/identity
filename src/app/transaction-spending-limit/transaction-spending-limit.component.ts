@@ -11,7 +11,6 @@ import { GlobalVarsService } from '../global-vars.service';
 @Component({
   selector: 'app-transaction-spending-limit',
   templateUrl: './transaction-spending-limit.component.html',
-  styleUrls: ['./transaction-spending-limit.component.scss'],
 })
 export class TransactionSpendingLimitComponent implements OnInit {
   @Input() transactionSpendingLimitResponse: TransactionSpendingLimitResponse =

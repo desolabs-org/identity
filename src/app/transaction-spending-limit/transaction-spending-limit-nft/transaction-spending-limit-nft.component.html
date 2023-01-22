@@ -14,14 +14,14 @@
           <img
             style="max-width: 100%; max-height: 100%"
             class="br-12px"
-            *ngIf="post?.ImageURLs?.length"
-            [src]="(this.post?.ImageURLs || [''])[0]"
+            *ngIf="this.post.ImageURLs?.length"
+            [src]="(this.post.ImageURLs || [''])[0]"
           />
 
           <!-- TODO: how to sanitize all of this stuff.... -->
           <iframe
-            [src]="(this.post?.VideoURLs || [''])[0] | sanitizeVideoUrl"
-            *ngIf="!post?.ImageURLs?.length && post?.VideoURLs?.length"
+            [src]="(this.post.VideoURLs || [''])[0] | sanitizeVideoUrl"
+            *ngIf="!this.post.ImageURLs?.length && this.post.VideoURLs?.length"
             class="br-12px"
             allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
             style="width: 100%; max-height: 100%"
@@ -37,7 +37,7 @@
             <div>
               {{
                 post
-                  ? post?.ProfileEntryResponse?.Username ||
+                  ? post.ProfileEntryResponse.Username ||
                     post.PosterPublicKeyBase58Check
                   : 'All NFTs:'
               }}
@@ -46,8 +46,8 @@
           <!--TODO: Truncate post body -->
           <div
             class="d-flex justify-content-start fs-14px py-10px"
-            *ngIf="post?.Body"
-            [innerHTML]="post?.Body || '' | sanitizePostBody"
+            *ngIf="this.post.Body"
+            [innerHTML]="this.post.Body || '' | sanitizePostBody"
           ></div>
         </div>
       </ng-container>

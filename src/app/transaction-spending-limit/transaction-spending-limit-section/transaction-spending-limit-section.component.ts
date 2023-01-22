@@ -18,7 +18,6 @@ import { TransactionSpendingLimitComponent } from '../transaction-spending-limit
 @Component({
   selector: 'app-transaction-spending-limit-section',
   templateUrl: './transaction-spending-limit-section.component.html',
-  styleUrls: ['./transaction-spending-limit-section.component.scss'],
 })
 export class TransactionSpendingLimitSectionComponent implements OnInit {
   @Input() sectionMap:

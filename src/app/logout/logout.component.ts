@@ -9,7 +9,6 @@ import { GlobalVarsService } from '../global-vars.service';
 @Component({
   selector: 'app-logout',
   templateUrl: './logout.component.html',
-  styleUrls: ['./logout.component.scss'],
 })
 export class LogoutComponent implements OnInit {
   publicKey = '';

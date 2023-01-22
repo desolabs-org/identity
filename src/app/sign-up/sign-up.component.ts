@@ -15,7 +15,6 @@ import { Network } from 'src/types/identity';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit, OnDestroy {
   static STEP_GENERATE_SEED = 'step_generate_seed';
@@ -128,7 +127,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
     if (this.globalVars.getFreeDeso) {
       this.globalVars.signedUp = true;
-      this.router.navigate(['/', RouteNames.GET_DESO], {
+      this.router.navigate(['/'], {
         queryParams: { publicKey: this.publicKeyAdded, signedUp: true },
         queryParamsHandling: 'merge',
       });

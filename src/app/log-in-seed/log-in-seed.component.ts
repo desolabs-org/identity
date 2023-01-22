@@ -12,7 +12,6 @@ import { RouteNames } from '../app-routing.module';
 @Component({
   selector: 'app-log-in-seed',
   templateUrl: './log-in-seed.component.html',
-  styleUrls: ['./log-in-seed.component.scss'],
 })
 export class LogInSeedComponent implements OnInit {
   loading = false;

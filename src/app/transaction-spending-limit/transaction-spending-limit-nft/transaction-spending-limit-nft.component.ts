@@ -12,7 +12,6 @@ import { TransactionSpendingLimitComponent } from '../transaction-spending-limit
 @Component({
   selector: 'app-transaction-spending-limit-nft',
   templateUrl: './transaction-spending-limit-nft.component.html',
-  styleUrls: ['./transaction-spending-limit-nft.component.scss'],
 })
 export class TransactionSpendingLimitNftComponent implements OnInit {
   @Input() nftPostHashHex: string = '';

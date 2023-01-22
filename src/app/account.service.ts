@@ -12,7 +12,6 @@ import {
   PrivateUserVersion,
   PublicUserInfo,
 } from '../types/identity';
-import { CookieService } from 'ngx-cookie';
 import HDKey from 'hdkey';
 import { EntropyService } from './entropy.service';
 import { SigningService } from './signing.service';
@@ -51,7 +50,6 @@ export class AccountService {
   constructor(
     private cryptoService: CryptoService,
     private globalVars: GlobalVarsService,
-    private cookieService: CookieService,
     private entropyService: EntropyService,
     private signingService: SigningService,
     private metamaskService: MetamaskService
