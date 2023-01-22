@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { CountryISO } from 'ngx-intl-tel-input';
 import { GlobalVarsService } from '../global-vars.service';
 import { BackendAPIService, User } from '../backend-api.service';
@@ -31,11 +31,11 @@ export class SignUpGetStarterDESOComponent implements OnInit {
   @Output() finishFlowEvent = new EventEmitter();
   @Output() onCancelButtonClicked = new EventEmitter();
 
-  phoneForm = new FormGroup({
-    phone: new FormControl(undefined, [Validators.required]),
+  phoneForm = new UntypedFormGroup({
+    phone: new UntypedFormControl(undefined, [Validators.required]),
   });
-  verificationCodeForm = new FormGroup({
-    verificationCode: new FormControl(undefined, [Validators.required]),
+  verificationCodeForm = new UntypedFormGroup({
+    verificationCode: new UntypedFormControl(undefined, [Validators.required]),
   });
 
   CountryISO = CountryISO;
