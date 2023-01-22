@@ -21,7 +21,7 @@ import { isNil } from 'lodash';
 import { AccountService } from '../../account.service';
 import { TextService } from '../../text.service';
 import { SigningService } from '../../signing.service';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TabSelectorComponent } from '../tab-selector/tab-selector.component';
