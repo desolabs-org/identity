@@ -2,31 +2,19 @@
   <button
     class="button button-large mb-20px bg-dark text-white"
     (click)="navigateToMetamaskSignup()"
-    queryParamsHandling="merge"
-    *ngIf="globalVars.showMetamask()"
-  >
-    <img src="assets/metamask.png" height="32px" width="32px" class="mr-10px" />
+    queryParamsHandling="merge">
+    <img src="assets/img/metamask-logo.png" height="32px" width="32px" class="mr-10px" />
 
     <span class="font-weight-bold">Sign up / log in with MetaMask</span>
   </button>
-  <button
-    class="button button-large button-primary mb-20px"
-    (click)="launchGoogle()"
-    *ngIf="!globalVars.hideGoogle"
-  >
-    <img
-      src="assets/google_logo.svg"
-      height="32px"
-      width="32px"
-      class="mr-10px"
-    />
-    <span class="font-weight-bold">Sign up / log in with Google</span>
-  </button>
+
   <button
     class="button button-large button-secondary mb-20px"
     [routerLink]="['/sign-up']"
     queryParamsHandling="merge"
   >
+    <img src="assets/img/deso-logo.png" height="42px" width="42px" class="mr-10px" />
+
     <span class="font-weight-normal">Sign up with DeSo seed</span>
   </button>
   <a class="link" [routerLink]="['/load-seed']" queryParamsHandling="merge"

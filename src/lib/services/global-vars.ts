@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AccessLevel, Network } from '../types/identity';
-import { environment } from '../environments/environment';
+import { AccessLevel, Network } from 'src/types/identity';
+import { environment } from 'src/environments/environment';
 import NodeWalletConnect from "@walletconnect/node";
 
 @Injectable({
@@ -25,10 +25,7 @@ export class GlobalVarsService {
 
   inTab = !!window.opener;
   webview = false;
-  hideGoogle = false;
-  jumio = false;
   signedUp = false;
-  getFreeDeso = false;
 
   // Set 'derive' url param to true to return a derived key when logging in or signing up
   derive = false;
@@ -38,18 +35,9 @@ export class GlobalVarsService {
   callbackInvalid = false;
   connector: NodeWalletConnect | null = null;
 
-  jumioUSDCents = 0;
-  referralUSDCents = 0;
-
-  referralHashBase58 = '';
-
   messagingGroupNameMaxLength = 32;
   defaultMessageKeyName = 'default-key';
   claimJwtDerivedPublicKey = 'derivedPublicKeyBase58Check';
-
-  nanosPerUSDExchangeRate = 0;
-  nanosToDeSoMemo = {};
-  blockHeight = 0;
 
   derivedPublicKey = '';
   transactionSpendingLimitResponse = '';
@@ -67,10 +55,6 @@ export class GlobalVarsService {
       // Most browsers block access to window.top when in an iframe
       return true;
     }
-  }
-
-  showJumio(): boolean {
-    return environment.jumioSupported && !this.webview && this.jumio;
   }
 
   nanosToDeSo(nanos: number, maximumFractionDigits: number = 2): string {
@@ -101,40 +85,8 @@ export class GlobalVarsService {
     });
   }
 
-  nanosToUSDNumber(nanos: number): number {
-    return nanos / this.nanosPerUSDExchangeRate;
-  }
-
-  nanosToUSD(nanos: number, decimal?: number | null): string {
-    if (decimal == null) {
-      decimal = 4;
-    }
-    return this.formatUSD(this.nanosToUSDNumber(nanos), decimal);
-  }
-
-  formatUSD(num: number, decimal: number): string {
-    return Number(num).toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: decimal,
-      maximumFractionDigits: decimal,
-    });
-  }
-
-  showMetamask(): boolean {
-    return this.network === Network.testnet || this.blockHeight > 166066;
-  }
-
   isMobile(): boolean {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  }
-
-  getFreeDESOMessage(): string {
-    return this.formatUSD(
-      (this.referralUSDCents ? this.referralUSDCents : this.jumioUSDCents) /
-        100,
-      0
-    );
   }
 
   ObjectKeyLength(obj: { [k: string]: any } | undefined): number {

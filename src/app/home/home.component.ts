@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { CryptoService } from '../crypto.service';
-import { AccountService } from '../account.service';
-import { IdentityService } from '../identity.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',

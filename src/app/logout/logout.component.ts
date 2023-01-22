@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CryptoService } from '../crypto.service';
-import { IdentityService } from '../identity.service';
-import { AccountService } from '../account.service';
+import { CryptoService } from 'src/lib/services/crypto';
+import { IdentityService } from 'src/lib/services/identity';
+import { AccountService } from 'src/lib/services/account';
 import { AccessLevel } from '../../types/identity';
-import { GlobalVarsService } from '../global-vars.service';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
 
 @Component({
   selector: 'app-logout',

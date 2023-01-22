@@ -3,15 +3,15 @@ import { ethers } from 'ethers';
 import {
   BackendAPIService,
   TransactionSpendingLimitResponse,
-} from '../backend-api.service';
+} from 'src/lib/services/backend-api';
 import { LoginMethod, Network } from '../../types/identity';
 import { ec } from 'elliptic';
-import { CryptoService } from '../crypto.service';
-import { AccountService } from '../account.service';
-import { IdentityService } from '../identity.service';
-import { GlobalVarsService } from '../global-vars.service';
-import { SigningService } from '../signing.service';
-import { MetamaskService } from '../metamask.service';
+import { CryptoService } from 'src/lib/services/crypto';
+import { AccountService } from 'src/lib/services/account';
+import { IdentityService } from 'src/lib/services/identity';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
+import { SigningService } from 'src/lib/services/signing';
+import { MetamaskService } from 'src/lib/services/metamask';
 import { RouteNames } from '../app-routing.module';
 import { Router } from '@angular/router';
 

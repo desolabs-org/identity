@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouteNames } from '../app-routing.module';
-import { GlobalVarsService } from '../global-vars.service';
-import { GoogleDriveService } from '../google-drive.service';
-import { Network } from '../../types/identity';
+import { Network } from 'src/types/identity';
 
 @Component({
   selector: 'app-log-in-options',
@@ -11,16 +9,10 @@ import { Network } from '../../types/identity';
 })
 export class LogInOptionsComponent implements OnInit {
   constructor(
-    private googleDrive: GoogleDriveService,
-    private router: Router,
-    public globalVars: GlobalVarsService
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
-
-  launchGoogle(): void {
-    this.googleDrive.launchGoogle();
-  }
 
   navigateToMetamaskSignup(): void {
     this.router.navigate(['/', RouteNames.SIGN_UP_METAMASK], {

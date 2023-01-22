@@ -11,8 +11,8 @@ import {
   NFTOperationLimitMap,
   OperationToCountMap,
   User,
-} from '../../backend-api.service';
-import { GlobalVarsService } from '../../global-vars.service';
+} from 'src/lib/services/backend-api';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
 import { TransactionSpendingLimitComponent } from '../transaction-spending-limit.component';
 
 @Component({

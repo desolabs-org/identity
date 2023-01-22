@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../account.service';
-import { IdentityService } from '../identity.service';
-import { GlobalVarsService } from '../global-vars.service';
-import { BackendAPIService } from '../backend-api.service';
+import { AccountService } from 'src/lib/services/account';
+import { IdentityService } from 'src/lib/services/identity';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
+import { BackendAPIService } from 'src/lib/services/backend-api';
 import { RouteNames } from '../app-routing.module';
 import { Router } from '@angular/router';
 import { LoginMethod, Network } from '../../types/identity';

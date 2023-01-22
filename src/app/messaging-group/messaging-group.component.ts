@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {AccountService} from '../account.service';
-import {IdentityService} from '../identity.service';
-import {BackendAPIService} from '../backend-api.service';
-import {GlobalVarsService} from '../global-vars.service';
-import {GoogleDriveService} from '../google-drive.service';
+import {AccountService} from 'src/lib/services/account';
+import {IdentityService} from 'src/lib/services/identity';
+import {BackendAPIService} from 'src/lib/services/backend-api';
+import {GlobalVarsService} from 'src/lib/services/global-vars';
 import {UserProfile} from '../../types/identity';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CryptoService} from '../crypto.service';
-import {SigningService} from '../signing.service';
+import {CryptoService} from 'src/lib/services/crypto';
+import {SigningService} from 'src/lib/services/signing';
 import {Observable} from 'rxjs';
 
 export enum MESSAGING_GROUP_OPERATION {
@@ -40,7 +39,6 @@ export class MessagingGroupComponent implements OnInit {
     private accountService: AccountService,
     private identityService: IdentityService,
     public globalVars: GlobalVarsService,
-    private googleDrive: GoogleDriveService,
     private backendApi: BackendAPIService,
     private router: Router,
     private activatedRoute: ActivatedRoute,

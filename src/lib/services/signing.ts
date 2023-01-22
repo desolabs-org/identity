@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import KeyEncoder from 'key-encoder';
 import * as jsonwebtoken from 'jsonwebtoken';
-import * as ecies from '../lib/ecies';
-import { CryptoService } from './crypto.service';
-import { GlobalVarsService } from './global-vars.service';
+import * as ecies from 'src/lib/ecies';
+import { CryptoService } from 'src/lib/services/crypto';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
 import * as sha256 from 'sha256';
-import { uvarint64ToBuf } from '../lib/bindata/util';
+import { uvarint64ToBuf } from 'src/lib/bindata/util';
 import { ec } from 'elliptic';
 
 @Injectable({

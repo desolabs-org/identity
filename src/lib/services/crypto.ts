@@ -12,8 +12,8 @@ import {
   randomBytes,
   createHash,
 } from 'crypto';
-import {AccessLevel, Network} from '../types/identity';
-import { GlobalVarsService } from './global-vars.service';
+import {AccessLevel, Network} from 'src/types/identity';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
 import { Keccak } from 'sha3';
 import * as sha256 from 'sha256';
 

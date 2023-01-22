@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IdentityService } from '../identity.service';
+import { IdentityService } from 'src/lib/services/identity';
 
 @Component({
   selector: 'app-embed',

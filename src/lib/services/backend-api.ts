@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { environment } from '../environments/environment';
-import { SigningService } from './signing.service';
-import { AccountService } from './account.service';
-import { CryptoService } from './crypto.service';
-import { GlobalVarsService } from './global-vars.service';
-import { DerivedKey, Network, UserProfile } from '../types/identity';
+import { environment } from 'src/environments/environment';
+import { SigningService } from 'src/lib/services/signing';
+import { AccountService } from 'src/lib/services/account';
+import { CryptoService } from 'src/lib/services/crypto';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
+import { DerivedKey, Network, UserProfile } from 'src/types/identity';
 
 export interface MetamaskSignInRequest {
   AmountNanos: number;
@@ -667,48 +667,6 @@ export class BackendAPIService {
     const req = this.post('query-eth-rpc', {
       Method: method,
       Params: params,
-    });
-
-    return req.pipe(
-      catchError((err) => {
-        console.error(JSON.stringify(err));
-        return throwError(err);
-      })
-    );
-  }
-
-  GetWyreWalletOrderReservation(
-    referenceId: string,
-    sourceAmount: number,
-    country: string,
-    sourceCurrency: string,
-    redirectURL: string
-  ): Observable<any> {
-    const req = this.post('get-wyre-wallet-order-reservation', {
-      ReferenceId: referenceId,
-      SourceAmount: sourceAmount,
-      Country: country,
-      SourceCurrency: sourceCurrency,
-      RedirectUrl: redirectURL,
-    });
-
-    return req.pipe(
-      catchError((err) => {
-        console.error(JSON.stringify(err));
-        return throwError(err);
-      })
-    );
-  }
-
-  GetWyreWalletOrderQuotation(
-    sourceAmount: number,
-    country: string,
-    sourceCurrency: string
-  ): Observable<any> {
-    const req = this.post('get-wyre-wallet-order-quotation', {
-      SourceAmount: sourceAmount,
-      Country: country,
-      SourceCurrency: sourceCurrency,
     });
 
     return req.pipe(

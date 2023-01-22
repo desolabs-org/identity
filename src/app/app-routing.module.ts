@@ -7,7 +7,6 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { ApproveComponent } from './approve/approve.component';
 import { LogInSeedComponent } from './log-in-seed/log-in-seed.component';
-import { GoogleComponent } from './auth/google/google.component';
 import { DeriveComponent } from './derive/derive.component';
 import { SharedSecretComponent } from './shared-secret/shared-secret.component';
 import { SignUpMetamaskComponent } from './sign-up-metamask/sign-up-metamask.component';
@@ -21,7 +20,6 @@ export class RouteNames {
   public static LOG_IN = 'log-in';
   public static LOAD_SEED = 'load-seed';
   public static APPROVE = 'approve';
-  public static AUTH_GOOGLE = 'auth/google';
   public static DERIVE = 'derive';
   public static GET_SHARED_SECRETS = 'get-shared-secrets';
   public static MESSAGING_GROUP = 'messaging-group';
@@ -44,11 +42,6 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   { path: RouteNames.APPROVE, component: ApproveComponent, pathMatch: 'full' },
-  {
-    path: RouteNames.AUTH_GOOGLE,
-    component: GoogleComponent,
-    pathMatch: 'full',
-  },
   { path: RouteNames.DERIVE, component: DeriveComponent, pathMatch: 'full' },
   {
     path: RouteNames.GET_SHARED_SECRETS,

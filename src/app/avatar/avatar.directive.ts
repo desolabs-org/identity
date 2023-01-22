@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
-import { GlobalVarsService } from '../global-vars.service';
-import { BackendAPIService } from '../backend-api.service';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
+import { BackendAPIService } from 'src/lib/services/backend-api';
 import _ from 'lodash';
 
 @Directive({

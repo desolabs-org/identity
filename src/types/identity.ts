@@ -12,9 +12,6 @@ export interface PrivateUserInfo {
   version: PrivateUserVersion;
   messagingKeyRandomness?: string;
   derivedPublicKeyBase58Check?: string;
-
-  /** DEPRECATED in favor of loginMethod */
-  google?: boolean;
 }
 
 export enum ExtraData {
@@ -23,19 +20,13 @@ export enum ExtraData {
 }
 
 export enum PrivateUserVersion {
-  // Adds "version"
-  V0 = 0,
-
-  // Adds "ethDepositAddress"
-  V1 = 1,
-
-  // Adds "loginMethod"
-  V2 = 2,
+  V0 = 0, // Adds "version"
+  V1 = 1, // Adds "ethDepositAddress"
+  V2 = 2, // Adds "loginMethod"
 }
 
 export enum LoginMethod {
   DESO = 'DESO',
-  GOOGLE = 'GOOGLE',
   METAMASK = 'METAMASK',
 }
 
@@ -110,32 +101,9 @@ export enum Network {
 }
 
 export enum AccessLevel {
-  // User revoked permissions
-  None = 0,
-
-  // Unused
-  Unused = 1,
-
-  // Approval required for all transactions
-  ApproveAll = 2,
-
-  // Approval required for buys, sends, and sells
-  ApproveLarge = 3,
-
-  // Node can sign all transactions without approval
-  Full = 4,
-}
-
-export interface GoogleAuthState {
-  testnet: boolean;
-  webview: boolean;
-  jumio: boolean;
-  callback: string;
-  derive: boolean;
-  getFreeDeso: boolean;
-  signedUp: boolean;
-  transactionSpendingLimitResponse: string;
-  deleteKey: boolean;
-  derivedPublicKey: string;
-  expirationDays: number;
+  None = 0, // User revoked permissions
+  Unused = 1, // Unused
+  ApproveAll = 2, // Approval required for all transactions
+  ApproveLarge = 3, // Approval required for buys, sends, and sells
+  Full = 4, // Node can sign all transactions without approval
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
-import { GlobalVarsService } from './global-vars.service';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
 import NodeWalletConnect from '@walletconnect/node';
 import WalletConnectQRCodeModal from '@walletconnect/qrcode-modal';
 import { ec } from 'elliptic';

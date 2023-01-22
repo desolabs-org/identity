@@ -23,6 +23,9 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lodash", "sha3", "sweetalert2", "elliptic"
+            ],
             "outputPath": "dist/identity",
             "index": "src/index.html",
             "main": "src/main.ts",

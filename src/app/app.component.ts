@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalVarsService } from './global-vars.service';
-import { IdentityService } from './identity.service';
-import { AccessLevel, Network } from '../types/identity';
-import { getStateParamsFromGoogle } from './auth/google/google.component';
-import { BackendAPIService } from './backend-api.service';
-import { AccountService } from './account.service';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
+import { IdentityService } from 'src/lib/services/identity';
+import { AccessLevel, Network } from 'src/types/identity';
+import { AccountService } from 'src/lib/services/account';
 
 @Component({
   selector: 'app-root',
@@ -14,13 +12,12 @@ import { AccountService } from './account.service';
 export class AppComponent implements OnInit {
   title = 'identity';
 
-  loading = true;
+  isLoading = true;
 
   constructor(
     private accountService: AccountService,
     private globalVars: GlobalVarsService,
-    private identityService: IdentityService,
-    private backendApiService: BackendAPIService
+    private identityService: IdentityService
   ) {}
 
   ngOnInit(): void {
@@ -39,32 +36,15 @@ export class AppComponent implements OnInit {
       this.globalVars.accessLevelRequest = parseInt(accessLevelRequest, 10);
     }
 
-    const stateParamsFromGoogle = getStateParamsFromGoogle(hashParams);
-    if (params.get('webview') || stateParamsFromGoogle.webview) {
-      this.globalVars.webview = true;
-    }
+    this.globalVars.signedUp = (params.get('signedUp') === 'true');
+    this.globalVars.webview = (params.get('webview') === 'true');
 
-    if (params.get('testnet') || stateParamsFromGoogle.testnet) {
+    if (params.get('testnet') === 'true') {
       this.globalVars.network = Network.testnet;
     }
 
-    if (params.get('hideGoogle')) {
-      this.globalVars.hideGoogle = true;
-    }
-
-    if (params.get('signedUp') === 'true' || stateParamsFromGoogle.signedUp) {
-      this.globalVars.signedUp = params.get('signedUp') === 'true';
-    }
-
-    if (
-      params.get('getFreeDeso') === 'true' ||
-      stateParamsFromGoogle.getFreeDeso
-    ) {
-      this.globalVars.getFreeDeso = true;
-    }
-
     // Callback should only be used in mobile applications, where payload is passed through URL parameters.
-    const callback = params.get('callback') || stateParamsFromGoogle.callback;
+    const callback = params.get('callback');
     if (callback) {
       try {
         const callbackURL = new URL(callback as string);
@@ -76,76 +56,26 @@ export class AppComponent implements OnInit {
     }
 
     if (
-      params.get('derive') === 'true' ||
-      stateParamsFromGoogle.derive
+      params.get('derive') === 'true'
     ) {
       this.globalVars.derive = true;
     }
 
-    const transactionSpendingLimitResponse =
-      params.get('transactionSpendingLimitResponse') ||
-      stateParamsFromGoogle.transactionSpendingLimitResponse;
+    const transactionSpendingLimitResponse = params.get('transactionSpendingLimitResponse');
     if (transactionSpendingLimitResponse) {
       this.globalVars.transactionSpendingLimitResponse = transactionSpendingLimitResponse;
     }
 
-    const derivedPublicKey =
-      params.get('derivedPublicKey') ||
-      stateParamsFromGoogle.derivedPublicKey;
+    const derivedPublicKey = params.get('derivedPublicKey');
     if (derivedPublicKey) {
       this.globalVars.derivedPublicKey = derivedPublicKey;
     }
 
-    const deleteKey =
-      params.get('deleteKey') === 'true' ||
-      stateParamsFromGoogle.deleteKey;
-    if (deleteKey) {
-      this.globalVars.deleteKey = true;
-    }
+    this.globalVars.deleteKey = params.get('deleteKey') === 'true';
 
-    const expirationDays =
-      parseInt(
-        params.get('expirationDays') ||
-        '0',
-        10
-      ) || stateParamsFromGoogle.expirationDays;
+    const expirationDays = parseInt(params.get('expirationDays') || '0', 10);
     if (expirationDays) {
       this.globalVars.expirationDays = expirationDays;
-    }
-
-    const referralCodeKey = 'referralCode';
-    let referralCode = params.get(referralCodeKey);
-    // Request may fail if browser doesn't support local storage e.g. incognito, third party cookies blocked, etc
-    try {
-      if (!referralCode) {
-        referralCode = localStorage.getItem(referralCodeKey);
-      }
-      if (referralCode) {
-        localStorage.setItem(referralCodeKey, referralCode);
-        this.globalVars.referralHashBase58 = referralCode;
-        this.backendApiService
-          .GetReferralInfoForReferralHash(referralCode)
-          .subscribe((res) => {
-            const referralInfo = res.ReferralInfoResponse.Info;
-            const countrySignUpBonus = res.CountrySignUpBonus;
-            if (!countrySignUpBonus.AllowCustomReferralAmount) {
-              this.globalVars.referralUSDCents =
-                countrySignUpBonus.ReferralAmountOverrideUSDCents;
-            } else if (
-              res.ReferralInfoResponse.IsActive &&
-              (referralInfo.TotalReferrals < referralInfo.MaxReferrals ||
-                referralInfo.MaxReferrals === 0)
-            ) {
-              this.globalVars.referralUSDCents =
-                referralInfo.RefereeAmountUSDCents;
-            } else {
-              this.globalVars.referralUSDCents =
-                countrySignUpBonus.ReferralAmountOverrideUSDCents;
-            }
-          });
-      }
-    } catch (e) {
-      console.error(e);
     }
 
     if (this.globalVars.callback) {
@@ -170,24 +100,9 @@ export class AppComponent implements OnInit {
       // Identity currently doesn't have any management UIs that can be accessed directly
       window.location.href = `https://desolabs.org`;
     }
-
-    this.backendApiService.GetAppState().subscribe((res) => {
-      this.globalVars.jumioUSDCents = res.JumioUSDCents;
-      this.globalVars.nanosPerUSDExchangeRate =
-        1e9 / (res.USDCentsPerDeSoExchangeRate / 100);
-      this.globalVars.blockHeight = res.BlockHeight;
-    });
   }
 
   finishInit(): void {
-    // Attempt to migrate all accounts. This can fail if the browser is not supported
-    try {
-      this.accountService.migrate();
-    } catch (e) {
-      console.error(e);
-    }
-
-    // Finish loading
-    this.loading = false;
+    this.isLoading = false;
   }
 }

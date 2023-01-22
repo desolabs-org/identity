@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CryptoService } from '../crypto.service';
-import { IdentityService } from '../identity.service';
-import { AccountService } from '../account.service';
-import { GlobalVarsService } from '../global-vars.service';
-import { SigningService } from '../signing.service';
+import { CryptoService } from 'src/lib/services/crypto';
+import { IdentityService } from 'src/lib/services/identity';
+import { AccountService } from 'src/lib/services/account';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
+import { SigningService } from 'src/lib/services/signing';
 import {
   BackendAPIService,
   TransactionSpendingLimitResponse,
   User,
-} from '../backend-api.service';
+} from 'src/lib/services/backend-api';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {

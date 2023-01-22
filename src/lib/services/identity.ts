@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject, zip } from 'rxjs';
 import { v4 as uuid } from 'uuid';
-import { AccessLevel, PublicUserInfo } from '../types/identity';
-import { CryptoService } from './crypto.service';
-import { GlobalVarsService } from './global-vars.service';
+import { AccessLevel, PublicUserInfo } from 'src/types/identity';
+import { CryptoService } from 'src/lib/services/crypto';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
 import { CookieService } from 'ngx-cookie';
-import { SigningService } from './signing.service';
+import { SigningService } from 'src/lib/services/signing';
 import { HttpParams } from '@angular/common/http';
 import {
   BackendAPIService,
   TransactionSpendingLimitResponse,
-} from './backend-api.service';
-import { AccountService } from './account.service';
+} from 'src/lib/services/backend-api';
+import { AccountService } from 'src/lib/services/account';
 import {
   Transaction,
   TransactionMetadataBasicTransfer,
@@ -37,8 +37,8 @@ import {
   TransactionMetadataDAOCoin,
   TransactionMetadataTransferDAOCoin,
   TransactionMetadataDAOCoinLimitOrder,
-} from '../lib/deso/transaction';
-import { SwalHelper } from '../lib/helpers/swal-helper';
+} from 'src/lib/deso/transaction';
+import { SwalHelper } from 'src/lib/helpers/swal-helper';
 
 export type DerivePayload = {
   publicKey: string;

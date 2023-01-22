@@ -6,8 +6,8 @@ import {
   DAOCoinLimitOrderLimitMap,
   TransactionSpendingLimitResponse,
   User,
-} from '../backend-api.service';
-import { GlobalVarsService } from '../global-vars.service';
+} from 'src/lib/services/backend-api';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
 @Component({
   selector: 'app-transaction-spending-limit',
   templateUrl: './transaction-spending-limit.component.html',

@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { of } from 'rxjs';
-import { GlobalVarsService } from 'src/app/global-vars.service';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
 import {
   BackendAPIService,
   NFTLimitOperationString,
   OperationToCountMap,
   PostEntryResponse,
-} from '../../backend-api.service';
+} from 'src/lib/services/backend-api';
 import { TransactionSpendingLimitComponent } from '../transaction-spending-limit.component';
 
 @Component({

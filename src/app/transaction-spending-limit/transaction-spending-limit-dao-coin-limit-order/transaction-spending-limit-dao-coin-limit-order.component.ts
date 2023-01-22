@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DAOCoinLimitOrderLimitItem, User } from '../../backend-api.service';
+import { DAOCoinLimitOrderLimitItem, User } from 'src/lib/services/backend-api';
 import { TransactionSpendingLimitComponent } from '../transaction-spending-limit.component';
 
 @Component({

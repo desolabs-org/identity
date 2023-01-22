@@ -2,9 +2,9 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginMethod, UserProfile } from 'src/types/identity';
 import { EventEmitter } from '@angular/core';
-import { AccountService } from '../account.service';
-import { BackendAPIService } from '../backend-api.service';
-import { GlobalVarsService } from '../global-vars.service';
+import { AccountService } from 'src/lib/services/account';
+import { BackendAPIService } from 'src/lib/services/backend-api';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
 
 @Component({
   selector: 'app-account-select',
@@ -15,7 +15,7 @@ export class AccountSelectComponent implements OnInit {
   @Output() onAccountSelect: EventEmitter<string> = new EventEmitter();
   @Input() allUsers: Observable<{ [key: string]: UserProfile }> =
     this.backendApi.GetUserProfiles(this.accountService.getPublicKeys());
-  @Input() componentTitle = 'Select an account';
+  @Input() componentTitle = 'Select account';
   @Input() hideLoginMethod = false;
   hasUsers = false;
   constructor(
@@ -32,7 +32,6 @@ export class AccountSelectComponent implements OnInit {
   public getLoginIcon(loginMethod: LoginMethod) {
     return {
       [LoginMethod.DESO]: 'assets/deso-logo.png',
-      [LoginMethod.GOOGLE]: 'assets/google_logo.svg',
       [LoginMethod.METAMASK]: 'assets/metamask.png',
     }[loginMethod];
   }

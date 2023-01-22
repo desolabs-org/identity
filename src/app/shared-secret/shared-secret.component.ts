@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../account.service';
-import { BackendAPIService } from '../backend-api.service';
-import { CryptoService } from '../crypto.service';
-import { GlobalVarsService } from '../global-vars.service';
+import { AccountService } from 'src/lib/services/account';
+import { BackendAPIService } from 'src/lib/services/backend-api';
+import { CryptoService } from 'src/lib/services/crypto';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
 import KeyEncoder from 'key-encoder';
 import * as jsonwebtoken from 'jsonwebtoken';
 import { HttpParams } from '@angular/common/http';

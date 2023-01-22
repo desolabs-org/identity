@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { EntropyService } from '../entropy.service';
-import { CryptoService } from '../crypto.service';
-import { AccountService } from '../account.service';
-import { IdentityService } from '../identity.service';
-import { GlobalVarsService } from '../global-vars.service';
+import { EntropyService } from 'src/lib/services/entropy';
+import { CryptoService } from 'src/lib/services/crypto';
+import { AccountService } from 'src/lib/services/account';
+import { IdentityService } from 'src/lib/services/identity';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
 import { environment } from '../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TextService } from '../text.service';
+import { TextService } from 'src/lib/services/text';
 import * as bip39 from 'bip39';
 import { RouteNames } from '../app-routing.module';
-import { BackendAPIService } from '../backend-api.service';
+import { BackendAPIService } from 'src/lib/services/backend-api';
 import { Network } from 'src/types/identity';
 
 @Component({
@@ -53,10 +53,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     private textService: TextService,
     private backendAPIService: BackendAPIService
   ) {
-    this.stepTotal = globalVars.showJumio() ? 3 : 2;
-    if (this.activatedRoute.snapshot.queryParamMap.has('origin')) {
-      this.stepTotal = 2;
-    }
+    this.stepTotal = 2;
   }
 
   ngOnInit(): void {}
@@ -125,13 +122,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
       this.globalVars.accessLevelRequest
     );
 
-    if (this.globalVars.getFreeDeso) {
-      this.globalVars.signedUp = true;
-      this.router.navigate(['/'], {
-        queryParams: { publicKey: this.publicKeyAdded, signedUp: true },
-        queryParamsHandling: 'merge',
-      });
-    } else if (this.globalVars.derive) {
+    if (this.globalVars.derive) {
       this.globalVars.signedUp = true;
       this.router.navigate(['/', RouteNames.DERIVE], {
         queryParams: { publicKey: this.publicKeyAdded, signedUp: true },

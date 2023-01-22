@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../account.service';
-import { IdentityService } from '../identity.service';
-import { CryptoService } from '../crypto.service';
-import { EntropyService } from '../entropy.service';
-import { GlobalVarsService } from '../global-vars.service';
-import { BackendAPIService } from '../backend-api.service';
+import { AccountService } from 'src/lib/services/account';
+import { IdentityService } from 'src/lib/services/identity';
+import { CryptoService } from 'src/lib/services/crypto';
+import { EntropyService } from 'src/lib/services/entropy';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
+import { BackendAPIService } from 'src/lib/services/backend-api';
 import { ActivatedRoute, Router } from '@angular/router';
 import HDNode from 'hdkey';
 import { RouteNames } from '../app-routing.module';

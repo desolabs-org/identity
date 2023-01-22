@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CryptoService } from './crypto.service';
-import { GlobalVarsService } from './global-vars.service';
+import { CryptoService } from 'src/lib/services/crypto';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
 import {
   AccessLevel,
   DefaultKeyPrivateInfo,
@@ -11,30 +11,30 @@ import {
   PrivateUserInfo,
   PrivateUserVersion,
   PublicUserInfo,
-} from '../types/identity';
+} from 'src/types/identity';
 import HDKey from 'hdkey';
-import { EntropyService } from './entropy.service';
-import { SigningService } from './signing.service';
+import { EntropyService } from 'src/lib/services/entropy';
+import { SigningService } from 'src/lib/services/signing';
 import sha256 from 'sha256';
-import { uint64ToBufBigEndian } from '../lib/bindata/util';
-import * as ecies from '../lib/ecies';
+import { uint64ToBufBigEndian } from 'src/lib/bindata/util';
+import * as ecies from 'src/lib/ecies';
 import { ec as EC } from 'elliptic';
 import {
   BackendAPIService,
   GetAccessBytesResponse,
   TransactionSpendingLimitResponse,
-} from './backend-api.service';
-import { MetamaskService } from './metamask.service';
+} from 'src/lib/services/backend-api';
+import { MetamaskService } from 'src/lib/services/metamask';
 import {
   Transaction,
   TransactionMetadataAuthorizeDerivedKey,
-} from '../lib/deso/transaction';
+} from 'src/lib/deso/transaction';
 import KeyEncoder from 'key-encoder';
 import * as jsonwebtoken from 'jsonwebtoken';
 import assert from 'assert';
-import { MessagingGroup } from './identity.service';
+import { MessagingGroup } from 'src/lib/services/identity';
 import bs58check from 'bs58check';
-import { SwalHelper } from '../lib/helpers/swal-helper';
+import { SwalHelper } from 'src/lib/helpers/swal-helper';
 
 export const ERROR_USER_NOT_FOUND = 'User not found';
 
@@ -410,8 +410,7 @@ export class AccountService {
     keychain: HDKey,
     mnemonic: string,
     extraText: string,
-    network: Network,
-    google?: boolean
+    network: Network
   ): string {
     const seedHex = this.cryptoService.keychainToSeedHex(keychain);
     const keyPair = this.cryptoService.seedHexToPrivateKey(seedHex);
@@ -423,10 +422,7 @@ export class AccountService {
     const ethDepositAddress = this.cryptoService.publicKeyToEthAddress(keyPair);
 
     let loginMethod: LoginMethod = LoginMethod.DESO;
-    if (google) {
-      loginMethod = LoginMethod.GOOGLE;
-    }
-
+    
     return this.addPrivateUser({
       seedHex,
       mnemonic,
@@ -513,52 +509,6 @@ export class AccountService {
       AccountService.LEVELS_STORAGE_KEY,
       JSON.stringify(levels)
     );
-  }
-
-  // Migrations
-
-  migrate(): void {
-    const privateUsers = this.getPrivateUsersRaw();
-
-    for (const publicKey of Object.keys(privateUsers)) {
-      const privateUser = privateUsers[publicKey];
-
-      // Migrate from null to V0
-      if (privateUser.version == null) {
-        // Add version field
-        privateUser.version = PrivateUserVersion.V0;
-      }
-
-      // Migrate from V0 -> V1
-      if (privateUser.version === PrivateUserVersion.V0) {
-        // Add ethDepositAddress field
-        const keyPair = this.cryptoService.seedHexToPrivateKey(
-          privateUser.seedHex
-        );
-        privateUser.ethDepositAddress =
-          this.cryptoService.publicKeyToEthAddress(keyPair);
-
-        // Increment version
-        privateUser.version = PrivateUserVersion.V1;
-      }
-
-      // Migrate from V1 -> V2
-      if (privateUser.version === PrivateUserVersion.V1) {
-        // Add loginMethod field
-        if (privateUser.google) {
-          privateUser.loginMethod = LoginMethod.GOOGLE;
-        } else {
-          privateUser.loginMethod = LoginMethod.DESO;
-        }
-
-        // Increment version
-        privateUser.version = PrivateUserVersion.V2;
-      }
-
-      privateUsers[publicKey] = privateUser;
-    }
-
-    this.setPrivateUsersRaw(privateUsers);
   }
 
   getPrivateSharedSecret(

@@ -795,10 +795,7 @@ i-feather[name='check-circle'] {
   text-align: center;
   color: #fff;
   border-bottom: 1px solid $border-grey;
-  margin-bottom: 60px;
-  @media (max-width: 445px) {
-    margin-bottom: 40px;
-  }
+  margin-bottom: 20px;
 }
 
 .full-screen {

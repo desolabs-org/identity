@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../account.service';
-import { DerivePayload, IdentityService } from '../identity.service';
+import { AccountService } from 'src/lib/services/account';
+import { DerivePayload, IdentityService } from 'src/lib/services/identity';
 import {
   BackendAPIService,
   TransactionSpendingLimitResponse,
-} from '../backend-api.service';
-import { GlobalVarsService } from '../global-vars.service';
+} from 'src/lib/services/backend-api';
+import { GlobalVarsService } from 'src/lib/services/global-vars';
 import { UserProfile } from '../../types/identity';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
