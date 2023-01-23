@@ -1,17 +1,18 @@
-<div class="identity-banner w-100" *ngIf="!globalVars.webview">
+<div class="identity-banner w-120" *ngIf="!globalVars.webview">
   <div
-    class="d-flex justify-content-between h-100 align-items-center banner-margin"
+    class="d-flex justify-content-between align-items-center banner-margin"
   >
-    <img src="/assets/img/logo-192.png" class="home-logo" />
-    <div
-      class="fs-18px font-weight-semibold d-flex align-items-center verify-site-banner"
-    >
+    <div class="d-flex align-items-center">
+      <img
+        src="assets/img/logo-192.png"
+        class="mr-5px"
+        style="height: 32px"/>
+      <span class="text-dark" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; font-weight: bold; font-size: 24px;">DeSo Labs</span>
+    </div>
+    <div class="fs-18px font-weight-semibold d-flex align-items-center verify-site-banner">
       <span class="fc-title">Make sure the URL address is: </span>
-      <div>
-        <span class="fc-green ml-5px">{{
-          globalVars.environment.hostname
-        }}</span>
-      </div>
+      <span class="fc-green ml-5px">{{ globalVars.environment.hostname }}</span>
+      
     </div>
   </div>
 </div>
