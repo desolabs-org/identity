@@ -30,7 +30,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   publicKeyAdded = '';
 
   // Advanced tab
-  advancedOpen = true;
+  advancedOpen = false;
   showMnemonicError = false;
   showEntropyHexError = false;
 
@@ -67,9 +67,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
   ////// STEP ONE BUTTONS | STEP_GENERATE_SEED ///////
 
   stepOneCopy(): void {
-    this.textService.copyText(
-      this.entropyService.temporaryEntropy?.mnemonic || ''
-    );
+    const contents = `${this.entropyService.temporaryEntropy?.mnemonic}\n\n${this.entropyService.temporaryEntropy?.extraText}`;
+    this.textService.copyText(contents || '');
     this.seedCopied = true;
   }
 

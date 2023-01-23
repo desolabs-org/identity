@@ -35,8 +35,8 @@ export class AccountSelectComponent implements OnInit {
 
   public getLoginIcon(loginMethod: LoginMethod) {
     return {
-      [LoginMethod.DESO]: 'assets/deso-logo.png',
-      [LoginMethod.METAMASK]: 'assets/metamask.png',
+      [LoginMethod.DESO]: 'assets/img/deso-logo.png',
+      [LoginMethod.METAMASK]: 'assets/img/metamask-logo.png',
     }[loginMethod];
   }
 }

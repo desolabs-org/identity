@@ -11,81 +11,93 @@
       <div class="title-text">Store your DeSo seed phrase</div>
       <div class="step-title">Step 1 of {{ stepTotal }}</div>
     </div>
-    <div class="subtitle-text">
-      Write, download, print, or copy it somewhere safe.
+    <p class="warning-text">
+      <small>Write, download, print, or copy your seed and pass phrases in a safe place.</small>
+    </p>
+
+    <div class="mt-15px">
+      <p class="title-text-small">
+        DeSo seed phrase (must be
+        <a
+          target="_blank"
+          href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki"
+          >BIP39</a
+        >
+        mnemonic):
+      </p>
+      <p
+        class="fc-red font-weight-normal fs-16px py-10px"
+        *ngIf="showMnemonicError"
+      >
+        You've entered an invalid mnemonic.
+      </p>
+      <div class="text-input-container-light mt-10px">
+        <textarea
+          [(ngModel)]="entropyService.temporaryEntropy.mnemonic"
+          (ngModelChange)="checkMnemonic()"
+          class="text-input"
+          style="resize: none; height: 70px"
+          rows="2"
+        ></textarea>
+      </div>
     </div>
-    <div class="warning-text">
-      If you lose your DeSo seed phrase your account will be lost forever.
+
+    <div class="mt-25px">
+      <p class="title-text-small">Passphrase:</p>
+      <div class="text-input-container-light mt-10px">
+        <textarea
+          [(ngModel)]="entropyService.temporaryEntropy.extraText"
+          (ngModelChange)="normalizeExtraText()"
+          class="text-input"
+          style="resize: none; height: 70px"
+          rows="2"
+        ></textarea>
+      </div>
     </div>
+
+
     <div class="seed-phrase-container">
-      <div
-        *ngIf="!entropyService.advancedOpen"
-        class="px-25px pt-10px pb-30px border-bottom"
-      >
-        {{ entropyService.temporaryEntropy.mnemonic }}
-      </div>
-      <div
-        class="fc-red px-15px pt-15px"
-        *ngIf="!entropyService.advancedOpen && hasEntropyError()"
-      >
-        Please fix errors in your advanced entropy configuration.
-      </div>
-      <div
-        class="fc-red px-15px pt-15px"
-        *ngIf="
-          !entropyService.advancedOpen &&
-          !hasEntropyError() &&
-          entropyService.temporaryEntropy.extraText.length > 0
-        "
-      >
-        Note that you have added a passphrase in the advanced menu.
-      </div>
       <div class="py-20px px-25px seed-actions-row">
         <div class="d-flex align-items-center">
           <button
             (click)="stepOneCopy()"
             class="seed-phrase-button d-flex align-items-center"
           >
-            <img
-              *ngIf="seedCopied"
-              src="assets/check-square.svg"
-              width="16px"
-              height="16px"
-              class="mr-5px"
-            />
-            <img *ngIf="!seedCopied" src="assets/copy.svg" class="mr-5px" />
-            <span>Copy</span>
+            <i *ngIf="seedCopied" class="fa fa-files-o" aria-hidden="true"></i>
+            <i *ngIf="!seedCopied" class="fa fa-files-o" aria-hidden="true"></i>
+            <span class="ml-5px">Copy</span>
           </button>
           <button
             (click)="stepOneDownload()"
             class="seed-phrase-button d-flex align-items-center ml-10px"
           >
-            <img src="assets/download.svg" class="mr-5px" />
-            <span>Download</span>
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <span class="ml-5px">Download</span>
           </button>
           <button
             (click)="stepOnePrint()"
             class="seed-phrase-button d-flex align-items-center ml-10px"
           >
-            <img src="assets/print.svg" class="mr-5px" />
-            <span>Print</span>
+            <i class="fa fa-print" aria-hidden="true"></i>
+            <span class="ml-5px">Print</span>
           </button>
         </div>
         <div
-          class="fc-blue fs-16px cursor-pointer toggle-advanced"
+          class="fc-blue fs-16px cursor-pointer toggle-advanced ml-10px"
           *ngIf="!entropyService.advancedOpen"
           (click)="entropyService.advancedOpen = true"
         >
-          Advanced
+          Show Entropy
         </div>
         <div
-          class="fc-blue fs-16px cursor-pointer toggle-advanced"
+          class="fc-blue fs-16px cursor-pointer toggle-advanced ml-10px"
           *ngIf="entropyService.advancedOpen"
           (click)="entropyService.advancedOpen = false"
         >
-          Simple
+          Hide Entropy
         </div>
       </div>
+
       <div
         class="border-top border-color-grey"
         *ngIf="entropyService.advancedOpen"
@@ -100,74 +112,11 @@
               phrase (you can't go wrong with a set of dice). You can also enter
               your own DeSo seed phrase directly if you prefer.
             </p>
-
-            <p class="pt-15px">
-              Because there is a standard for generating seed phrases for
-              Bitcoin (called
-              <a
-                target="_blank"
-                href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki"
-                >BIP39</a
-              >), and because we use this same standard to generate DeSo seed
-              phrases, DeSo seed phrases can also be used with any Bitcoin
-              wallet that implements this standard under the m/44'/0'/0'/0/0
-              derivation path (e.g.
-              <a target="_blank" href="https://wallet.mycelium.com/">Mycelium</a
-              >, <a target="_blank" href="https://electrum.org">Electrum</a>).
-              Similarly, any standard Bitcoin seed phrase you have can also be
-              used as a DeSo seed phrase. Of course, all of this can be verified
-              using a tool like the
-              <a target="_blank" href="https://iancoleman.io/bip39/"
-                >Ian Coleman mnemonic generator</a
-              >
-              (must click "show entropy details") so you know this generator is
-              doing what it says it is.
-            </p>
-          </div>
-
-          <div style="margin-top: 55px">
-            <p class="title-text-small">
-              Custom DeSo seed phrase (must be
-              <a
-                target="_blank"
-                href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki"
-                >BIP39</a
-              >
-              mnemonic):
-            </p>
-            <p
-              class="fc-red font-weight-normal fs-16px py-10px"
-              *ngIf="showMnemonicError"
-            >
-              You've entered an invalid mnemonic.
-            </p>
-            <div class="text-input-container-light mt-10px">
-              <textarea
-                [(ngModel)]="entropyService.temporaryEntropy.mnemonic"
-                (ngModelChange)="checkMnemonic()"
-                class="text-input"
-                style="resize: none; height: 70px"
-                rows="2"
-              ></textarea>
-            </div>
-          </div>
-
-          <div class="mt-25px">
-            <p class="title-text-small">Passphrase:</p>
-            <div class="text-input-container-light mt-10px">
-              <textarea
-                [(ngModel)]="entropyService.temporaryEntropy.extraText"
-                (ngModelChange)="normalizeExtraText()"
-                class="text-input"
-                style="resize: none; height: 70px"
-                rows="2"
-              ></textarea>
-            </div>
           </div>
 
           <div class="mt-25px">
             <p class="title-text-small">
-              Custom Entropy (hex = base16 = [0-9a-f]):
+              Custom Entropy (base16):
             </p>
             <p
               class="fc-red font-weight-normal fs-16px py-10px"

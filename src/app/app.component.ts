@@ -97,7 +97,8 @@ export class AppComponent implements OnInit {
       });
     } else {
       // Identity currently doesn't have any management UIs that can be accessed directly
-      window.location.href = `https://desolabs.org`;
+      // window.location.href = `https://desolabs.org`;
+      this.finishInit();
     }
   }
 
