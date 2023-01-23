@@ -26,7 +26,7 @@
             "allowedCommonJsDependencies": [
               "lodash", "sha3", "sweetalert2", "elliptic"
             ],
-            "outputPath": "dist/identity",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
