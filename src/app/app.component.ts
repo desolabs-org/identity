@@ -6,8 +6,7 @@ import { AccountService } from 'src/lib/services/account';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
   title = 'identity';

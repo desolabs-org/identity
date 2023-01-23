@@ -17,6 +17,8 @@ export class AccountSelectComponent implements OnInit {
   @Input() allUsers: Observable<{ [key: string]: UserProfile }> =
     this.backendApi.GetUserProfiles(this.accountService.getPublicKeys());
   
+  @Input() componentTitle = 'Select account';
+  
   @Input() hideLoginMethod = false;
   
   hasUsers = false;
