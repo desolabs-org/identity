@@ -16,13 +16,11 @@
     </p>
 
     <div class="mt-15px">
-      <p class="title-text-small">
+      <p class="main-text mb-10px">
         DeSo seed phrase (must be
         <a
           target="_blank"
-          href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki"
-          >BIP39</a
-        >
+          href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki">BIP39</a>
         mnemonic):
       </p>
       <p
@@ -31,26 +29,26 @@
       >
         You've entered an invalid mnemonic.
       </p>
-      <div class="text-input-container-light mt-10px">
+      <div class="text-input-container">
         <textarea
           [(ngModel)]="entropyService.temporaryEntropy.mnemonic"
           (ngModelChange)="checkMnemonic()"
           class="text-input"
-          style="resize: none; height: 70px"
-          rows="2"
+          style="resize: none; height: 100px"
+          rows="3"
         ></textarea>
       </div>
     </div>
 
     <div class="mt-25px">
-      <p class="title-text-small">Passphrase:</p>
-      <div class="text-input-container-light mt-10px">
+      <p class="main-text mb-10px">Passphrase:</p>
+      <div class="text-input-container">
         <textarea
           [(ngModel)]="entropyService.temporaryEntropy.extraText"
           (ngModelChange)="normalizeExtraText()"
           class="text-input"
-          style="resize: none; height: 70px"
-          rows="2"
+          style="resize: none; height: 100px"
+          rows="3"
         ></textarea>
       </div>
     </div>

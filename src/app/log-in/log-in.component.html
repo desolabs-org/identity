@@ -12,22 +12,26 @@
     <li class="list-group-item">
       <span *ngIf="globalVars.accessLevelRequest >= 2">✅</span>
       <span *ngIf="globalVars.accessLevelRequest < 2">❌</span>
-      <span title="Allow reading my public key and use profile information?">
-        &nbsp;Identify me using on-chain data
+      <span 
+          title="Allow reading my public key and use profile information?" 
+          class="ml-5px">
+        Identify me using on-chain data
       </span>
     </li>
     <li class="list-group-item">
       <span *ngIf="globalVars.accessLevelRequest >= 3">✅</span>
       <span *ngIf="globalVars.accessLevelRequest < 3">❌</span>
-      <span title="Skip approval of social transactions like creating a post, sending a message, adding a like, follow, ...)?">
-        &nbsp;Skip confirmations for social activity
+      <span title="Skip approval of social transactions like creating a post, sending a message, adding a like, follow, ...)?" class="ml-5px">
+        Skip confirmations for social activity
       </span>
     </li>
     <li class="list-group-item">
       <span *ngIf="globalVars.accessLevelRequest === 4">✅</span>
       <span *ngIf="globalVars.accessLevelRequest < 4">❌</span>
-      <span title="Skip approval of user requested transactions like buying or selling coins?">
-        &nbsp;Skip confirmations for all user activity
+      <span 
+          title="Skip approval of user requested transactions like buying or selling coins?" 
+          class="ml-5px">
+        Skip confirmations for all user activity
       </span>
     </li>
   </ul>
