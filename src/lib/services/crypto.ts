@@ -40,20 +40,7 @@ export class CryptoService {
   // Safari only lets us store things in cookies
   mustUseStorageAccess(): boolean {
     // Webviews have full control over storage access
-    if (this.globalVars.webview) {
-      return false;
-    }
-
-    const supportsStorageAccess =
-      typeof document.hasStorageAccess === 'function';
-    const isChrome = navigator.userAgent.indexOf('Chrome') > -1;
-    const isSafari = !isChrome && navigator.userAgent.indexOf('Safari') > -1;
-
-    // Firefox and Edge support the storage access API but do not enforce it.
-    // For now, only use cookies if we support storage access and use Safari.
-    const mustUseStorageAccess = supportsStorageAccess && isSafari;
-
-    return mustUseStorageAccess;
+    return !this.globalVars.webview && typeof document.hasStorageAccess === 'function'
   }
 
   // 32 bytes = 256 bits is plenty of entropy for encryption

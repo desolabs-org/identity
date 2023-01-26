@@ -691,9 +691,9 @@ export class BackendAPIService {
     TransactionSpendingLimitHex: string
   ): Observable<any> {
     const req = this.post('authorize-derived-key', {
-      OwnerPublicKeyBase58Check,
+      OwnerPublicKeyBase58Check, 
       DerivedPublicKeyBase58Check,
-      DerivedKeySignature: false,
+      DerivedKeySignature: false, 
       ExpirationBlock,
       MinFeeRateNanosPerKB: 1000,
       AccessSignature,
@@ -708,14 +708,8 @@ export class BackendAPIService {
     );
   }
 
-  GetBulkMessagingPublicKeys(
-    GroupOwnerPublicKeysBase58Check: string[],
-    MessagingGroupKeyNames: string[],
-  ): Observable<any> {
-    const req = this.post('get-bulk-messaging-public-keys', {
-      GroupOwnerPublicKeysBase58Check,
-      MessagingGroupKeyNames,
-    });
+  GetBulkMessagingPublicKeys(GroupOwnerPublicKeysBase58Check: string[], MessagingGroupKeyNames: string[]): Observable<any> {
+    const req = this.post('get-bulk-messaging-public-keys', { GroupOwnerPublicKeysBase58Check, MessagingGroupKeyNames });
 
     return req.pipe(
     catchError((err) => {
@@ -726,9 +720,7 @@ export class BackendAPIService {
   }
 
   SubmitTransaction(TransactionHex: string): Observable<any> {
-    const req = this.post('submit-transaction', {
-      TransactionHex,
-    });
+    const req = this.post('submit-transaction', { TransactionHex });
 
     return req.pipe(
       catchError((err) => {

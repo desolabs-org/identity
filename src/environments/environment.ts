@@ -6,11 +6,7 @@ export const environment = {
   production: false,
   hostname: 'identity.dev.desolabs.org',
   nodeURL: 'https://node.desolabs.org',
-  fullAccessHostnames: [
-    'localhost', 
-    'frontend.dev.desolabs.org', 
-    'dev.deso.ninja'
-  ],
+  fullAccessHostnames: [''],
   noAccessHostnames: [''],
   jumioSupported: false,
   megaswapURL: 'https://megaswap.xyz',

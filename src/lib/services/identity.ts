@@ -521,23 +521,35 @@ export class IdentityService {
     return AccessLevel.Full;
   }
 
-  private hasAccessLevel(data: any, requiredAccessLevel: AccessLevel): boolean {
-    const {
-      payload: { encryptedSeedHex, accessLevel, accessLevelHmac },
-    } = data;
+  private approve(data: any, requiredAccessLevel: AccessLevel): boolean {
+    const { payload: { encryptedSeedHex, accessLevel, accessLevelHmac } } = data;
     if (accessLevel < requiredAccessLevel) {
+      this.respond(data.id, { approvalRequired: true, required: requiredAccessLevel, provided: accessLevel });
       return false;
     }
 
-    const seedHex = this.cryptoService.decryptSeedHex(
-      encryptedSeedHex,
-      this.globalVars.hostname
-    );
-    return this.cryptoService.validAccessLevelHmac(
-      accessLevel,
-      seedHex,
-      accessLevelHmac
-    );
+    const seedHex = this.cryptoService.decryptSeedHex(encryptedSeedHex, this.globalVars.hostname);
+
+    if (!accessLevelHmac || !seedHex) {
+      this.respond(data.id, { approvalRequired: true, validData: false });
+      return false;
+    }
+
+    const hasAccess = this.cryptoService.validAccessLevelHmac(accessLevel, seedHex, accessLevelHmac);
+
+    if (!hasAccess) {
+      this.respond(data.id, { approvalRequired: true, validSignature: false });
+      return false;
+    }
+
+    const hasEncryptionKey = this.cryptoService.hasSeedHexEncryptionKey(this.globalVars.hostname);
+
+    if (!hasEncryptionKey) {
+      this.respond(data.id, { approvalRequired: true, hasEncryptionKey: false });
+      return false;
+    }
+
+    return true;
   }
 
   // This method checks if transaction in the payload has correct outputs for requested AccessLevel.
@@ -561,20 +573,6 @@ export class IdentityService {
         }
       }
     }
-    return true;
-  }
-
-  private approve(data: any, accessLevel: AccessLevel): boolean {
-    const hasAccess = this.hasAccessLevel(data, accessLevel);
-    const hasEncryptionKey = this.cryptoService.hasSeedHexEncryptionKey(
-      this.globalVars.hostname
-    );
-
-    if (!hasAccess || !hasEncryptionKey) {
-      this.respond(data.id, { approvalRequired: true });
-      return false;
-    }
-
     return true;
   }
 

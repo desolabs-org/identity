@@ -120,7 +120,7 @@ export class AccountService {
   }
 
   getAccessLevel(publicKey: string, hostname: string): AccessLevel {
-    if (!GlobalVarsService.fullAccessHostnames.includes(hostname)) {
+    if (GlobalVarsService.noAccessHostnames.includes(hostname)) {
       return AccessLevel.None;
     }
 
