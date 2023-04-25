@@ -3,6 +3,8 @@ import { GlobalVarsService } from 'src/lib/services/global-vars';
 import { IdentityService } from 'src/lib/services/identity';
 import { AccessLevel, Network } from 'src/types/identity';
 import { AccountService } from 'src/lib/services/account';
+import { BackendAPIService } from 'src/lib/services/backend-api';
+import { setupInteractionEventListener } from 'src/app/interaction-event-helpers';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +18,11 @@ export class AppComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private globalVars: GlobalVarsService,
-    private identityService: IdentityService
-  ) {}
+    private identityService: IdentityService,
+    private backendApiService: BackendAPIService
+  ) {
+    setupInteractionEventListener();
+  }
 
   ngOnInit(): void {
     // load params
@@ -54,9 +59,7 @@ export class AppComponent implements OnInit {
       }
     }
 
-    if (
-      params.get('derive') === 'true'
-    ) {
+    if (params.get('derive') === 'true') {
       this.globalVars.derive = true;
     }
 
@@ -77,9 +80,11 @@ export class AppComponent implements OnInit {
       this.globalVars.expirationDays = expirationDays;
     }
 
-    if (this.globalVars.callback) {
-      // If callback is set, we won't be sending the initialize message.
-      this.globalVars.hostname = 'localhost';
+    if (this.globalVars.callback || this.globalVars.redirectURI) {
+      if (this.globalVars.callback) {
+        this.globalVars.hostname = 'localhost';
+      }
+
       this.finishInit();
     } else if (
       this.globalVars.webview ||

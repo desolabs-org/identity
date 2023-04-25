@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CryptoService } from 'src/lib/services/crypto';
 import { IdentityService } from 'src/lib/services/identity';
 import { AccountService } from 'src/lib/services/account';
-import { AccessLevel } from '../../types/identity';
+import { AccessLevel } from 'src/types/identity';
 import { GlobalVarsService } from 'src/lib/services/global-vars';
 
 @Component({

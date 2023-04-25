@@ -4,7 +4,7 @@ import {
   BackendAPIService,
   TransactionSpendingLimitResponse,
 } from 'src/lib/services/backend-api';
-import { LoginMethod, Network } from '../../types/identity';
+import { LoginMethod, Network } from 'src/types/identity';
 import { ec } from 'elliptic';
 import { CryptoService } from 'src/lib/services/crypto';
 import { AccountService } from 'src/lib/services/account';

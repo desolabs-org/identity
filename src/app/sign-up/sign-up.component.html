@@ -2,7 +2,7 @@
 
 <div
   class="page-container"
-  *ngIf="globalVars.inTab || globalVars.webview || globalVars.callback"
+  *ngIf="globalVars.inTab || globalVars.webview || globalVars.callback || globalVars.redirectURI"
 >
   <!-- Step 1 -->
   <!-- Generate seed phrase. -->
@@ -60,6 +60,8 @@
       <div class="py-20px px-25px seed-actions-row">
         <div class="d-flex align-items-center">
           <button
+            data-control-name="sign-up-with-seed-copy-button"
+            data-control-option="copy"
             (click)="stepOneCopy()"
             class="seed-phrase-button d-flex align-items-center"
           >
@@ -70,6 +72,8 @@
           <button
             (click)="stepOneDownload()"
             class="seed-phrase-button d-flex align-items-center ml-10px"
+            data-control-name="sign-up-with-seed-copy-button"
+            data-control-option="download"
           >
             <i class="fa fa-download" aria-hidden="true"></i>
             <span class="ml-5px">Download</span>
@@ -77,6 +81,8 @@
           <button
             (click)="stepOnePrint()"
             class="seed-phrase-button d-flex align-items-center ml-10px"
+            data-control-name="sign-up-with-seed-copy-button"
+            data-control-option="print"
           >
             <i class="fa fa-print" aria-hidden="true"></i>
             <span class="ml-5px">Print</span>
@@ -86,6 +92,7 @@
           class="fc-blue fs-16px cursor-pointer toggle-advanced ml-10px"
           *ngIf="!entropyService.advancedOpen"
           (click)="entropyService.advancedOpen = true"
+          data-control-name="sign-up-with-seed-advanced-toggle-button"
         >
           Show Entropy
         </div>
@@ -93,6 +100,7 @@
           class="fc-blue fs-16px cursor-pointer toggle-advanced ml-10px"
           *ngIf="entropyService.advancedOpen"
           (click)="entropyService.advancedOpen = false"
+          data-control-name="sign-up-with-seed-simple-toggle-button"
         >
           Hide Entropy
         </div>
@@ -141,6 +149,7 @@
             (click)="getNewEntropy()"
             class="button button-small button-secondary mt-20px"
             style="height: 54px"
+            data-control-name="sign-up-with-seed-advanced-regenerate-button"
           >
             Regenerate
           </button>
@@ -216,15 +225,18 @@
     <div class="d-flex align-items-center" style="margin-top: -15px">
       <div class="fs-18px mt-15px fc-default font-weight-normal">
         By proceeding, you agree to the
-        <a (click)="clickTos()" class="font-weight-bold cursor-pointer"
-          >Terms of Service</a
-        >.
+        <a
+          (click)="clickTos()"
+          class="font-weight-bold cursor-pointer"
+          data-control-name="sign-up-with-seed-tos-link"
+        >Terms of Service</a>.
       </div>
     </div>
     <div class="d-flex pt-15px justify-content-between">
       <button
         (click)="stepTwoBack()"
         class="button button-small button-secondary"
+        data-control-name="sign-up-with-seed-step-2-back-button"
       >
         Back
       </button>
@@ -236,6 +248,7 @@
           "
           (click)="stepTwoNext()"
           class="button button-small button-primary"
+          data-control-name="sign-up-with-seed-step-2-next-button"
         >
           Next
         </button>
