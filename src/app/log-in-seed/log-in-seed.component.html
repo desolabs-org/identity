@@ -2,7 +2,7 @@
 
 <div
   class="page-container"
-  *ngIf="globalVars.inTab || globalVars.webview || globalVars.callback"
+  *ngIf="globalVars.inTab || globalVars.webview || globalVars.callback || globalVars.redirectURI"
 >
   <div class="title-text mb-20px">Log in to {{ globalVars.hostname }}</div>
 
@@ -58,6 +58,7 @@
   </div>
 
   <button
+    data-control-name="log-in-with-seed-load-account-button"
     (click)="clickLoadAccount()"
     class="button button-primary button-large mt-20px"
   >

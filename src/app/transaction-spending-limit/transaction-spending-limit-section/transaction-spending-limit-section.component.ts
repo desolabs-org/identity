@@ -1,6 +1,8 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ArrowToggleComponent } from 'src/app/arrow-toggle/arrow-toggle.component';
+import { Component, Input, OnInit } from '@angular/core';
 import {
+  AccessGroupLimitMapItem,
+  AccessGroupMemberLimitMapItem,
+  AssociationLimitMapItem,
   CreatorCoinLimitOperationString,
   CreatorCoinOperationLimitMap,
   DAOCoinLimitOperationString,
@@ -25,7 +27,10 @@ export class TransactionSpendingLimitSectionComponent implements OnInit {
     | CreatorCoinOperationLimitMap
     | DAOCoinOperationLimitMap
     | NFTOperationLimitMap
-    | DAOCoinLimitOrderLimitMap = {};
+    | DAOCoinLimitOrderLimitMap
+    | AssociationLimitMapItem[]
+    | AccessGroupLimitMapItem[]
+    | AccessGroupMemberLimitMapItem[] = {};
   @Input() sectionTitle: string = '';
 
   @Input() userMap: { [k: string]: User } = {};
@@ -44,6 +49,9 @@ export class TransactionSpendingLimitSectionComponent implements OnInit {
   nftLimitMap: NFTOperationLimitMap = {};
   daoCoinLimitOrderLimitMap: DAOCoinLimitOrderLimitMap = {};
   daoCoinLimitOrderLimitItems: DAOCoinLimitOrderLimitItem[] = [];
+  associationLimitMap: AssociationLimitMapItem[] = [];
+  accessGroupLimitMap: AccessGroupLimitMapItem[] = [];
+  accessGroupMemberLimitMap: AccessGroupMemberLimitMapItem[] = [];
 
   constructor(public globalVars: GlobalVarsService) {}
 
@@ -54,7 +62,7 @@ export class TransactionSpendingLimitSectionComponent implements OnInit {
         break;
       case TransactionSpendingLimitComponent.CreatorCoinLimitsSection:
       case TransactionSpendingLimitComponent.DAOCoinLimitsSection:
-        this.anyCreatorItem = this.sectionMap[''] as
+        this.anyCreatorItem = (this.sectionMap as DAOCoinOperationLimitMap | CreatorCoinOperationLimitMap)[''] as
           | OperationToCountMap<CreatorCoinLimitOperationString>
           | OperationToCountMap<DAOCoinLimitOperationString>
           | undefined;
@@ -64,7 +72,7 @@ export class TransactionSpendingLimitSectionComponent implements OnInit {
         delete this.coinLimitMap[''];
         break;
       case TransactionSpendingLimitComponent.NFTLimitsSection:
-        this.anyNFTItem = this.sectionMap[''] as
+        this.anyNFTItem = (this.sectionMap as NFTOperationLimitMap)[''] as
           | OperationToCountMap<NFTLimitOperationString>
           | undefined;
         this.nftLimitMap = {...this.sectionMap} as NFTOperationLimitMap;
@@ -91,6 +99,14 @@ export class TransactionSpendingLimitSectionComponent implements OnInit {
           });
         }
         break;
+      case TransactionSpendingLimitComponent.AssociationSection:
+        this.associationLimitMap = this.sectionMap as AssociationLimitMapItem[];
+        break;
+      case TransactionSpendingLimitComponent.AccessGroupSection:
+        this.accessGroupLimitMap = this.sectionMap as AccessGroupLimitMapItem[];
+        break;
+      case TransactionSpendingLimitComponent.AccessGroupMemberSection:
+        this.accessGroupMemberLimitMap = this.sectionMap as AccessGroupMemberLimitMapItem[];
     }
 
     this.showAll = this.getSectionMapLength() <= this.defaultNumShown;
@@ -108,6 +124,12 @@ export class TransactionSpendingLimitSectionComponent implements OnInit {
         return 'NFT';
       case TransactionSpendingLimitComponent.DAOCoinLimitOrderLimitSection:
         return 'DAO coin limit order';
+      case TransactionSpendingLimitComponent.AssociationSection:
+        return 'Association';
+      case TransactionSpendingLimitComponent.AccessGroupSection:
+        return 'Access Group';
+      case TransactionSpendingLimitComponent.AccessGroupMemberSection:
+        return 'Access Group Member';
       default:
         return '';
     }
@@ -144,9 +166,17 @@ export class TransactionSpendingLimitSectionComponent implements OnInit {
   }
 
   getSectionMapLength(): number {
-    return this.sectionTitle ===
-      TransactionSpendingLimitComponent.DAOCoinLimitOrderLimitSection
-      ? this.daoCoinLimitOrderLimitItems.length
-      : this.globalVars.ObjectKeyLength(this.sectionMap);
+    switch (this.sectionTitle) {
+      case TransactionSpendingLimitComponent.DAOCoinLimitOrderLimitSection:
+        return this.daoCoinLimitOrderLimitItems.length;
+      case TransactionSpendingLimitComponent.AssociationSection:
+        return this.associationLimitMap.length;
+      case TransactionSpendingLimitComponent.AccessGroupSection:
+        return this.accessGroupLimitMap.length;
+      case TransactionSpendingLimitComponent.AccessGroupMemberSection:
+        return this.accessGroupMemberLimitMap.length;
+      default:
+        return this.globalVars.ObjectKeyLength(this.sectionMap);
+    }
   }
 }

@@ -107,3 +107,4 @@ export enum AccessLevel {
   ApproveLarge = 3, // Approval required for buys, sends, and sells
   Full = 4, // Node can sign all transactions without approval
 }
+

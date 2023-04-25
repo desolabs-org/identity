@@ -2,7 +2,7 @@
 
 <div
   class="container home-container text-center"
-  *ngIf="globalVars.inTab || globalVars.webview"
+  *ngIf="globalVars.inTab || globalVars.webview || globalVars.redirectURI"
 >
   <div class="fs-18px main-text">
     Authorize <b>{{ globalVars.hostname }}</b> to:
