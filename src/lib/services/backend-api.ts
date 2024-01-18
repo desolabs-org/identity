@@ -258,7 +258,7 @@ export interface GetAccessBytesResponse {
 })
 export class BackendAPIService {
   blockCypherToken = 'cd455c8a5d404bb0a23880b72f56aa86';
-  endpoint = `${environment.nodeURL}/api/v0`;
+  endpoint = `https://node.deso.org/api/v0`;
 
   constructor(
     private httpClient: HttpClient,
